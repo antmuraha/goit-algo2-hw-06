@@ -73,6 +73,12 @@ python task_2/count_unique_ips.py "https://drive.usercontent.google.com/u/0/uc?i
 # Set method: 28 unique IPs in 0.333126 seconds
 # HyperLogLog method: 26 unique IPs in 0.526195 seconds
 
+# Comparison results:
+# Metric                           Accurate     HyperLogLog
+# ------------------------- --------------- ---------------
+# Count Unique Items                   28.0            26.0
+# Execution Time (sec)                 0.34            0.41
+
 
 # precision = 6
 python task_2/count_unique_ips.py "https://drive.usercontent.google.com/u/0/uc?id=13NUCSG7l_z2B7gYuQubYIpIjJTnwOAOb&export=download" --precision 8
@@ -107,6 +113,12 @@ python task_2/count_unique_ips.py "https://drive.usercontent.google.com/u/0/uc?i
 # Using cached file: .cache/4620c394dff8a4d40332f5c93f30f758.log
 # Set method: 28 unique IPs in 0.330612 seconds
 # HyperLogLog method: 28 unique IPs in 0.407142 seconds
+
+# Comparison results:
+# Metric                           Accurate     HyperLogLog
+# ------------------------- --------------- ---------------
+# Count Unique Items                   28.0            28.0
+# Execution Time (sec)                 0.39            0.41
 
 ```
 

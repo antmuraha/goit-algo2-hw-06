@@ -185,6 +185,13 @@ def compare_methods(log_path: str | Path, precision: int = 14) -> None:
     print(f"Set method: {set_count} unique IPs in {set_time:.6f} seconds")
     print(f"HyperLogLog method: {hll_count} unique IPs in {hll_time:.6f} seconds")
 
+    # Comparison results
+    print(f"\nComparison results:")
+    print(f"{'Metric':<25} {'Accurate':>15} {'HyperLogLog':>15}")
+    print(f"{'-'*25} {'-'*15} {'-'*15}")
+    print(f"{'Count Unique Items':<25} {set_count:>15.1f} {hll_count:>15.1f}")
+    print(f"{'Execution Time (sec)':<25} {set_time:>15.2f} {hll_time:>15.2f}")
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
