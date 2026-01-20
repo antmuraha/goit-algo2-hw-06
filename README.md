@@ -2,7 +2,7 @@
 
 This repository contains solutions for two algorithmic problems:
 
-- Password uniqueness checks using Bloom Filter - for working with big data where memory conservation and processing speed are critical.
+- Password uniqueness checks using Bloom Filter - for working with big data where memory efficiency and processing speed are critical.
 
 - Counting unique elements in large data sets, including exact methods and approximate algorithms such as HyperLogLog.
 
@@ -34,3 +34,103 @@ Password 'guest' - unique.
 ```
 
 ## Task 2. HyperLogLog performance comparison with accurate unique element counting
+
+Comparison of accurate counting of unique elements using the `set` structure and counting using `HyperLogLog`.
+
+```bash
+
+# precision = 4
+python task_2/count_unique_ips.py "https://drive.usercontent.google.com/u/0/uc?id=13NUCSG7l_z2B7gYuQubYIpIjJTnwOAOb&export=download" --precision 4
+
+# Reading log from URL...
+# ==================================================
+# Exact counting using set:
+# ==================================================
+# Unique IP addresses (exact): 28
+
+# ==================================================
+# Approximate counting using HyperLogLog (precision=4):
+# ==================================================
+# Unique IP addresses (HyperLogLog): 26
+
+# ==================================================
+# Comparison:
+# ==================================================
+# Exact count:        28
+# HyperLogLog count:  26
+# Absolute error:     2
+# Error rate:         7.14%
+
+# Memory usage (estimated):
+# Set:                ~1,792 bytes
+# HyperLogLog:        ~16 bytes
+# Memory reduction:   112.0x
+
+
+# precision = 6
+python task_2/count_unique_ips.py "https://drive.usercontent.google.com/u/0/uc?id=13NUCSG7l_z2B7gYuQubYIpIjJTnwOAOb&export=download" --precision 8
+
+# Reading log from URL...
+# ==================================================
+# Exact counting using set:
+# ==================================================
+# Unique IP addresses (exact): 28
+
+# ==================================================
+# Approximate counting using HyperLogLog (precision=8):
+# ==================================================
+# Unique IP addresses (HyperLogLog): 28
+
+# ==================================================
+# Comparison:
+# ==================================================
+# Exact count:        28
+# HyperLogLog count:  28
+# Absolute error:     0
+# Error rate:         0.00%
+
+# Memory usage (estimated):
+# Set:                ~1,792 bytes
+# HyperLogLog:        ~256 bytes
+# Memory reduction:   7.0x
+
+```
+
+### Development
+
+```bash
+# Run local development on the small example structure data
+python task_2/count_unique_ips.py data/example-access-data.log
+
+# Reading log from local file...
+# ==================================================
+# Exact counting using set:
+# ==================================================
+# Unique IP addresses (exact): 2
+
+# ==================================================
+# Approximate counting using HyperLogLog (precision=5):
+# ==================================================
+# Unique IP addresses (HyperLogLog): 2
+
+# ==================================================
+# Comparison:
+# ==================================================
+# Exact count:        2
+# HyperLogLog count:  2
+# Absolute error:     0
+# Error rate:         0.00%
+
+# Memory usage (estimated):
+# Set:                ~128 bytes
+# HyperLogLog:        ~32 bytes
+# Memory reduction:   4.0x
+```
+
+## 🤝 Contributing
+
+This is a repo for the GoIT course. If you're also a student working on similar exercises, feel free to use this as a reference, but make sure to understand the concepts and implement your own solution.
+
+## 📄 License
+
+This project is created for educational purposes as part of the GoIT course curriculum.
