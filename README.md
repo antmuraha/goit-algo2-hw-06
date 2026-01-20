@@ -43,14 +43,17 @@ Comparison of accurate counting of unique elements using the `set` structure and
 python task_2/count_unique_ips.py "https://drive.usercontent.google.com/u/0/uc?id=13NUCSG7l_z2B7gYuQubYIpIjJTnwOAOb&export=download" --precision 4
 
 # Reading log from URL...
+
 # ==================================================
 # Exact counting using set:
 # ==================================================
+# Using cached file: .cache/4620c394dff8a4d40332f5c93f30f758.log
 # Unique IP addresses (exact): 28
 
 # ==================================================
 # Approximate counting using HyperLogLog (precision=4):
 # ==================================================
+# Using cached file: .cache/4620c394dff8a4d40332f5c93f30f758.log
 # Unique IP addresses (HyperLogLog): 26
 
 # ==================================================
@@ -65,20 +68,27 @@ python task_2/count_unique_ips.py "https://drive.usercontent.google.com/u/0/uc?i
 # Set:                ~1,792 bytes
 # HyperLogLog:        ~16 bytes
 # Memory reduction:   112.0x
+# Using cached file: .cache/4620c394dff8a4d40332f5c93f30f758.log
+# Using cached file: .cache/4620c394dff8a4d40332f5c93f30f758.log
+# Set method: 28 unique IPs in 0.333126 seconds
+# HyperLogLog method: 26 unique IPs in 0.526195 seconds
 
 
 # precision = 6
 python task_2/count_unique_ips.py "https://drive.usercontent.google.com/u/0/uc?id=13NUCSG7l_z2B7gYuQubYIpIjJTnwOAOb&export=download" --precision 8
 
 # Reading log from URL...
+
 # ==================================================
 # Exact counting using set:
 # ==================================================
+# Using cached file: .cache/4620c394dff8a4d40332f5c93f30f758.log
 # Unique IP addresses (exact): 28
 
 # ==================================================
 # Approximate counting using HyperLogLog (precision=8):
 # ==================================================
+# Using cached file: .cache/4620c394dff8a4d40332f5c93f30f758.log
 # Unique IP addresses (HyperLogLog): 28
 
 # ==================================================
@@ -93,6 +103,10 @@ python task_2/count_unique_ips.py "https://drive.usercontent.google.com/u/0/uc?i
 # Set:                ~1,792 bytes
 # HyperLogLog:        ~256 bytes
 # Memory reduction:   7.0x
+# Using cached file: .cache/4620c394dff8a4d40332f5c93f30f758.log
+# Using cached file: .cache/4620c394dff8a4d40332f5c93f30f758.log
+# Set method: 28 unique IPs in 0.330612 seconds
+# HyperLogLog method: 28 unique IPs in 0.407142 seconds
 
 ```
 

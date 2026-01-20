@@ -1,3 +1,5 @@
+import time
+from pathlib import Path
 import argparse
 import hashlib
 import json
@@ -15,12 +17,30 @@ def is_url(value: str | Path) -> bool:
 def open_log_source(log_source: str | Path):
     """Yield lines from a local file or HTTP(S) URL."""
     if is_url(log_source):
-        response = urlopen(str(log_source))
-        try:
-            for raw in response:
-                yield raw.decode("utf-8", errors="ignore")
-        finally:
-            response.close()
+        # Create .cache directory if it doesn't exist
+        cache_dir = Path(".cache")
+        cache_dir.mkdir(exist_ok=True)
+
+        # Generate cache filename from URL hash
+        url_hash = hashlib.md5(str(log_source).encode()).hexdigest()
+        cache_file = cache_dir / f"{url_hash}.log"
+
+        # Download and cache if not already cached
+        if not cache_file.exists():
+            print(f"Downloading and caching file from {log_source}...")
+            response = urlopen(str(log_source))
+            try:
+                with cache_file.open("wb") as f:
+                    f.write(response.read())
+            finally:
+                response.close()
+        else:
+            print(f"Using cached file: {cache_file}")
+
+        # Read from cached file
+        with cache_file.open("r", encoding="utf-8") as file_handle:
+            for raw in file_handle:
+                yield raw
     else:
         with Path(log_source).open("r", encoding="utf-8") as file_handle:
             for raw in file_handle:
@@ -153,6 +173,19 @@ def count_unique_ips_hyperloglog(log_path: str | Path, precision: int = 14) -> i
     return hll.count()
 
 
+def compare_methods(log_path: str | Path, precision: int = 14) -> None:
+    start_time = time.time()
+    set_count = count_unique_ips_set(log_path)
+    set_time = time.time() - start_time
+
+    start_time = time.time()
+    hll_count = count_unique_ips_hyperloglog(log_path, precision)
+    hll_time = time.time() - start_time
+
+    print(f"Set method: {set_count} unique IPs in {set_time:.6f} seconds")
+    print(f"HyperLogLog method: {hll_count} unique IPs in {hll_time:.6f} seconds")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Count unique IP addresses using set and HyperLogLog."
@@ -235,6 +268,9 @@ def main() -> None:
             print(f"Set:                ~{set_memory:,} bytes")
             print(f"HyperLogLog:        ~{hll_memory:,} bytes")
             print(f"Memory reduction:   {memory_ratio:.1f}x")
+
+            compare_methods(log_source, precision=args.precision)
+
         print()
 
 
